@@ -4,7 +4,7 @@ def hello():
 
 # Task 2: Greet with a Formatted String
 def greet(name):
-    return "Hello, " + name + "!"
+    return f'Hello, {name}!'
 
 # Task 3: Calculator
 def calc(val1, val2, operator = "multiply"):
@@ -31,22 +31,22 @@ def calc(val1, val2, operator = "multiply"):
        return "You can't multiply those values!"
 
 # Task 4: Data Type Conversion
-def data_type_conversion(val, dataType):
+def data_type_conversion(val, dType):
     try:
-       if isinstance(val, str) and dataType == "int":
+       if isinstance(val, str) and dType == "int":
           return int(val)
-       if isinstance(val, str) and dataType == "float":
+       if isinstance(val, str) and dType == "float":
           return float(val)
-       if isinstance(val, int) and dataType == "float":
+       if isinstance(val, int) and dType == "float":
           return float(val)
-       if isinstance(val, int) and dataType == "str":
+       if isinstance(val, int) and dType == "str":
           return str(val)
-       if isinstance(val, float) and dataType == "int":
+       if isinstance(val, float) and dType == "int":
           return int(val)
-       if isinstance(val, float) and dataType == "str":
+       if isinstance(val, float) and dType == "str":
           return str(val)
     except ValueError:
-       return f"You can't convert {val} into a {dataType}."
+       return f"You can't convert {val} into a {dType}."
 
 # Task 5: Grading System, Using *args
 def grade(*args):
@@ -66,11 +66,11 @@ def grade(*args):
       return "Invalid data was provided."
    
 # Task 6: Use a For Loop with a Range
-def repeat(string, count):
+def repeat(text, count):
    try:
     repeat_phrase = ""
     for _ in range(count):
-       repeat_phrase += string
+       repeat_phrase += text
     return repeat_phrase
    except TypeError:
     return "Invalid data type was provided."
@@ -89,9 +89,9 @@ def student_scores(param, **kwargs):
        return "Invalid data type was provided."
 
 # Task 8: Titleize, with String and List Operations
-def titleize(str):
+def titleize(text):
    try:
-    words = str.split()
+    words = text.split()
     capitalized_words = []
     for i, word in enumerate(words):
       if words[i] == words[0]:
@@ -124,10 +124,10 @@ def hangman(secret, guess):
     return "Invalid data type was provided."
 
 # Task 10: Pig Latin, Another String Manipulation Exercise
-def pig_latin(str):
+def pig_latin(text):
     try:
      pig_latin_phrase = []
-     words = str.split()
+     words = text.split()
      for word in words:
        i = 0
        pig_latin_list = ""
