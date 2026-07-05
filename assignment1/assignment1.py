@@ -12,37 +12,41 @@ def calc(val1, val2, operator = "multiply"):
         if operator == "add":
             return val1 + val2
         elif operator == "divide":
+          return val1 / val2
+        elif operator == "int_divide":
           return val1 // val2
         elif operator == "multiply":
           return val1 * val2
+        elif operator == "power":
+          return val1 ** val2
         elif operator == "subtract":
           return val1 - val2
         elif operator == "modulo":
           return val1 % val2
         else:
-           return "Operator not supported."
+          return "Operator not supported."
     except ZeroDivisionError:
        return "You can't divide by 0!"
     except TypeError:
        return "You can't multiply those values!"
 
 # Task 4: Data Type Conversion
-def data_type_conversion(val, type):
+def data_type_conversion(val, dataType):
     try:
-       if isinstance(val, str) and type == "int":
+       if isinstance(val, str) and dataType == "int":
           return int(val)
-       if isinstance(val, str) and type == "float":
+       if isinstance(val, str) and dataType == "float":
           return float(val)
-       if isinstance(val, int) and type == "float":
+       if isinstance(val, int) and dataType == "float":
           return float(val)
-       if isinstance(val, int) and type == "str":
+       if isinstance(val, int) and dataType == "str":
           return str(val)
-       if isinstance(val, float) and type == "int":
+       if isinstance(val, float) and dataType == "int":
           return int(val)
-       if isinstance(val, float) and type == "str":
+       if isinstance(val, float) and dataType == "str":
           return str(val)
     except ValueError:
-       return f"You can't convert {val} into a {type}."
+       return f"You can't convert {val} into a {dataType}."
 
 # Task 5: Grading System, Using *args
 def grade(*args):
