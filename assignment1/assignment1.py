@@ -19,11 +19,13 @@ def calc(val1, val2, operator = "multiply"):
           return val1 - val2
         elif operator == "modulo":
           return val1 % val2
+        else:
+           return "Operator not supported."
     except ZeroDivisionError:
        return "You can't divide by 0!"
     except TypeError:
        return "You can't multiply those values!"
-    
+
 # Task 4: Data Type Conversion
 def data_type_conversion(val, type):
     try:
@@ -61,11 +63,13 @@ def grade(*args):
    
 # Task 6: Use a For Loop with a Range
 def repeat(string, count):
-   try: 
-    for i in range(count):
-      return string * count
+   try:
+    repeat_phrase = ""
+    for _ in range(count):
+       repeat_phrase += string
+    return repeat_phrase
    except TypeError:
-      return "Invalid data type was provided."
+    return "Invalid data type was provided."
 
 # Task 7: Student Scores, Using **kwargs
 def student_scores(param, **kwargs):
@@ -117,9 +121,10 @@ def hangman(secret, guess):
 
 # Task 10: Pig Latin, Another String Manipulation Exercise
 def pig_latin(str):
-    pig_latin_phrase = []
-    words = str.split()
-    for word in words:
+    try:
+     pig_latin_phrase = []
+     words = str.split()
+     for word in words:
        i = 0
        pig_latin_list = ""
        while len(word) > i:
@@ -133,7 +138,8 @@ def pig_latin(str):
              break
        other_part_of_word = word[i:]
        pig_latin_phrase.append(other_part_of_word + pig_latin_list + 'ay')
-    result = " ".join(pig_latin_phrase)
-    return result
-
-print(pig_latin("the quick brown fox"))
+     result = " ".join(pig_latin_phrase)
+     return result
+    except TypeError:
+       return "Invalid data type was provided."
+    
