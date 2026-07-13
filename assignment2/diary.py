@@ -4,17 +4,13 @@ import traceback
 try:
     with open("diary.txt", "a") as file:
         stop_entry = "done for now"
-        user_entry = "" 
-        first_time = True
-        while True:
-            if first_time:
-                user_entry = input("What happened today? ")
-                first_time = False
-            else:
-                user_entry = input("What else? ")
+        
+        user_entry = input("What happened today? ")
+        file.write(user_entry + "\n")
+                
+        while user_entry != stop_entry:
+            user_entry = input("What else? ")
             file.write(user_entry + "\n")
-            if user_entry == stop_entry:
-                break 
 except Exception as e:
    trace_back = traceback.extract_tb(e.__traceback__)
    stack_trace = list()
