@@ -12,9 +12,9 @@ try:
                 first_time = False 
             else: 
                 user_entry = input("What else? ") 
-                file.write(user_entry + "\n") 
+            file.write(user_entry + "\n") 
             if user_entry == stop_entry: 
-                break 
+                break
 except Exception as e:
    trace_back = traceback.extract_tb(e.__traceback__)
    stack_trace = list()

@@ -1,6 +1,5 @@
 # Task 2: Read a CSV file
 import csv
-import traceback
 
 def read_employees():
     try: 
@@ -19,7 +18,6 @@ def read_employees():
         print(f"An exception occurred: {e}")
    
 employees = read_employees()
-print(employees)
 
 # Task 3: Find the Column Index
 def column_index(employee_id):
@@ -173,9 +171,9 @@ minutes_list = create_minutes_list()
 # Task 15: Write Out Sorted List
 def write_sorted_list():
     try:
-        minutes_sorted_list = sorted(minutes_list, key=lambda x:x[1])
+        minutes_list.sort(key=lambda x: x[1])
         new_date = list(map(lambda x: (x[0], 
-            datetime.strftime(x[1], "%B %d, %Y")), minutes_sorted_list))
+            datetime.strftime(x[1], "%B %d, %Y")), minutes_list))
         with open("./minutes.csv", "w", newline='') as file:
             writer = csv.writer(file)
             writer.writerow(minutes1["fields"])
