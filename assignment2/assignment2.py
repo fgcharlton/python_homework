@@ -1,7 +1,8 @@
 # Task 2: Read a CSV file
 import csv
-try: 
-    def read_employees():
+
+def read_employees():
+    try: 
         employee_dict = {}
         rows = []
         with open("../csv/employees.csv", "r") as file:
@@ -13,8 +14,8 @@ try:
                     rows.append(row)
         employee_dict["rows"] = rows
         return employee_dict
-except Exception as e:
-   print(f"An error occurred: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
    
 employees = read_employees()
 print(employees)
@@ -96,7 +97,8 @@ import os
 
 def get_this_value():
     try:
-        return os.environ["THISVALUE"]
+        THISVALUE = os.getenv("THISVALUE")
+        return THISVALUE
     except Exception as e:
        print(f"An error occurred: {e}")
 
@@ -105,12 +107,11 @@ import custom_module
 
 def set_that_secret(new_secret):
     try:
-        custom_module.secret = str(new_secret)
+        custom_module.set_secret(new_secret)
         return new_secret
     except Exception as e:
        print(f"An error occurred: {e}")
 
-print(set_that_secret("new secret"))
 print(custom_module.secret)
 
 # Task 12: Read minutes1.csv and minutes2.csv
@@ -160,8 +161,8 @@ from datetime import datetime
 def create_minutes_list():
     try:
         minutes_list = list(minutes_set)
-        new_date = tuple(map(lambda minutes_list: (minutes_list[0], 
-            datetime.strptime(minutes_list[1], "%B %d, %Y")), minutes_list))
+        new_date = tuple(map(lambda x: (x[0], 
+            datetime.strptime(x[1], "%B %d, %Y")), minutes_list))
         return list(new_date)
     except Exception as e:
        print(f"An error occurred: {e}")
@@ -172,8 +173,8 @@ minutes_list = create_minutes_list()
 def write_sorted_list():
     try:
         minutes_sorted_list = sorted(minutes_list, key=lambda x:x[1])
-        new_date = list(map(lambda minutes_sorted_list: (minutes_sorted_list[0], 
-            datetime.strftime(minutes_sorted_list[1], "%B %d, %Y")), minutes_sorted_list))
+        new_date = list(map(lambda x: (x[0], 
+            datetime.strftime(x[1], "%B %d, %Y")), minutes_sorted_list))
         with open("./minutes.csv", "w", newline='') as file:
             writer = csv.writer(file)
             writer.writerow(minutes1["fields"])

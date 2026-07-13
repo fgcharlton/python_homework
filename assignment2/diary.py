@@ -6,14 +6,15 @@ try:
         stop_entry = "done for now"
         user_entry = "" 
         first_time = True
-        while user_entry != stop_entry:
-            if first_time == True:
-                user_entry = input("What happened today?\n")
-                file.write(user_entry + "\n")
+        while True:
+            if first_time:
+                user_entry = input("What happened today? ")
                 first_time = False
             else:
-                user_entry = input("What else?\n")
-                file.write(user_entry + "\n")
+                user_entry = input("What else? ")
+            file.write(user_entry + "\n")
+            if user_entry == stop_entry:
+                break 
 except Exception as e:
    trace_back = traceback.extract_tb(e.__traceback__)
    stack_trace = list()
