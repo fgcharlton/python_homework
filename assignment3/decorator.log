@@ -9,4 +9,4 @@ return: True
 function: manyKwargs
 positional parameters: none
 keyword parameters: {'name': 'Fisher', 'role': 'Student'}
-return: <function logger_decorator at 0x1026bc3a0>
+return: <function logger_decorator at 0x102fd0af0>

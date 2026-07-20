@@ -9,16 +9,24 @@ logger.addHandler(logging.FileHandler("./decorator.log","a"))
 def logger_decorator(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        logger.log(logging.INFO, f"function: {func.__name__}")
         if args:
-            logger.log(logging.INFO, f"positional parameters: {args}")
+            positional = f"positional parameters: {args}"
         else:
-            logger.log(logging.INFO, "positional parameters: none")
+            positional = "positional parameters: none"
         if kwargs:
-            logger.log(logging.INFO, f"keyword parameters: {kwargs}")
+            keyword = f"keyword parameters: {kwargs}"
         else:
-            logger.log(logging.INFO, "keyword parameters: none")
-        logger.log(logging.INFO, f"return: {result}")
+            keyword = "keyword parameters: none"
+        
+        log_entry = (
+            f"function: {func.__name__}\n"
+            f"{positional}\n"
+            f"{keyword}\n"
+            f"return: {result}"
+        )
+
+        logger.log(logging.INFO, log_entry)
+
         return result 
     return wrapper 
 
