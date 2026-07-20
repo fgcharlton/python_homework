@@ -1,0 +1,12 @@
+function: hello
+positional parameters: none
+keyword parameters: none
+return: None
+function: manyArgs
+positional parameters: (1,)
+keyword parameters: none
+return: True
+function: manyKwargs
+positional parameters: none
+keyword parameters: {'name': 'Fisher', 'role': 'Student'}
+return: <function logger_decorator at 0x1026bc3a0>
