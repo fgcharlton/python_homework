@@ -43,7 +43,7 @@ json_employees = pd.read_json('additional_employees.json')
 print(json_employees)
 
 # Combine DataFrames:
-more_employees = pd.concat([task1_older, task2_data_frame], ignore_index=True)
+more_employees = pd.concat([task2_employees, json_employees], ignore_index=True)
 print(more_employees)
 
 # Task 3: Data Inspection - Using Head, Tail, and Info Methods
@@ -75,12 +75,11 @@ print(clean_data)
 
 # Convert Age to numeric and handle missing values
 clean_data["Age"] = pd.to_numeric(clean_data["Age"], errors="coerce")
-clean_data["Age_missing"] = clean_data["Age"].isnull()
 print(clean_data)
 
 # Convert Salary to numeric and replace known place holders with (unknown, n/a) with NaN
+clean_data["Salary"] = clean_data["Salary"].replace(["unknown", "n/a"], pd.NA)
 clean_data["Salary"] = pd.to_numeric(clean_data["Salary"], errors="coerce")
-clean_data["Salary_missing"] = clean_data["Salary"].isnull()
 print(clean_data)
 
 # Fill missing numeric values (use fillna). Fill Age with the mean and Salary with the median
@@ -93,11 +92,8 @@ clean_data["Salary"] = clean_data["Salary"].fillna(median_salary)
 print(clean_data)
 
 # Convert Hire Data to datetime 
-clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], errors="coerce")
+clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
 print(clean_data)
-
-median_date = clean_data["Hire Date"].median() # Handle missing dates with median date
-clean_data["Hire Date"] = clean_data["Hire Date"].fillna(median_date)
 
 # Strip extra whitespace and standardize Name and Department as uppercase
 clean_data["Name"] = clean_data["Name"].str.strip()
