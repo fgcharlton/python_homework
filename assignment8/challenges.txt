@@ -1,0 +1,7 @@
+1. The first issue I had was connecting the original page to the page with the Top 10 list. 
+In order to trouble shoot this, I tried to look at my notes, the powerpoint from the class session,
+and other examples online to connect the two pages. 
+
+2. The second issue that I had was trying to find the correct XPATH to pull the top 10 list. Again, I tried to
+look at my notes, the powerpoint from the class session, and other examples online to find the correct XPATH. 
+Also with this, I slowly built onto the XPATH until I reached the correct file path. 

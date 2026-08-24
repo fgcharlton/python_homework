@@ -1,0 +1,25 @@
+Task 5: Ethical Web Scraping
+
+Which sections of the website are restricted for crawling?
+Yes, several sections are restricted for all crawlers:
+* /w/
+* /api/
+* /trap/
+* /wiki/Special:
+* /wiki/Spezial:
+* /wiki/Spesial:
+* /wiki/Special%3A
+* /wiki/Spezial%3A
+* /wiki/Spesial%3A
+
+There are also specific sections depending on specific Wikipedia languagues, such as #ar for Arabic Wikipedia.
+
+Are there specific rules for certain user agents?
+Yes. Certain users are not allowed to crawl the site, such as MJ12bot. 
+Some other users, like SemrushBot, need a delay between requests (i.e., 5 seconds).
+Friendly, low-speed bots are welcome to view article pages, but not dynamically-generated pages. 
+
+Explain robots.txt and write 2-3 senetences explaining its purpose and how it promotes ethical scraping.
+Robots.txt allows you to see if you can scrape information off a website. If you are able to scrape information,
+it also tells you what sections you would be allowed to scrape. Sometimes, a robots.txt also tells you how many 
+times you're able to make requests without overwhelming the server.
