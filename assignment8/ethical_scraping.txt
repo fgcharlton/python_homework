@@ -22,6 +22,5 @@ Friendly, low-speed bots are welcome to view article pages, but not dynamically-
 Explain robots.txt and write 2-3 senetences explaining its purpose and how it promotes ethical scraping.
 Robots.txt allows you to see if you can scrape information off a website. If you are able to scrape information,
 it also tells you what sections you would be allowed to scrape. Sometimes, a robots.txt also tells you how many 
-times you're able to make requests without overwhelming the server. Overall, the robots.text file allows you to answer
-several questions about whether you can scapre a web page, what sections you can scrape, and if there are certain rules
-that you need to follow. 
+times you're able to make requests without overwhelming the server. Overall, using robots.txt allows for ethical
+scraping because it respects the website owners' wishes for scraping their website.
