@@ -53,8 +53,8 @@ try:
 
         # Create book
         book = {"Title":title, 
-                "Authors":author_text, 
-                "Format_Publish_Year":format_publish}
+                "Author":author_text, 
+                "Format-Year":format_publish}
 
         # Add each book to the results 
         results.append(book)        
@@ -72,4 +72,5 @@ print(df)
 df.to_csv('get_books.csv', index=False)
 
 # Create a get_books.json
-df.to_json('get_books.json', orient='index')
+with open("get_books.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, indent=4)

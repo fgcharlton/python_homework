@@ -27,10 +27,10 @@ try:
     lists = driver.find_elements(By.XPATH,'//h3[@id="top-102025-list"]/following-sibling::ol[1]//a')
 
     for list in lists:
-        name = list.text
+        title = list.text
         href = list.get_attribute("href")
 
-        top_10_list.append({"Name": name, "Link": href})
+        top_10_list.append({"Title": title, "HREF Link": href})
 
     print(top_10_list)
 except Exception as e:

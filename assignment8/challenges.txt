@@ -1,7 +1,10 @@
-1. The first issue I had was connecting the original page to the page with the Top 10 list. 
-In order to trouble shoot this, I tried to look at my notes, the powerpoint from the class session,
-and other examples online to connect the two pages. 
+1. The first issue I had was connecting the original page to the page with the Top 10 list. I had a difficult time 
+determining how to switch to the new web page based on a link found in the original webpage. In order to trouble shoot this, I tried to look at my notes, the powerpoint from the class session,
+and other examples online to connect the two pages. Once I found that you could use driver.get() again to switch the website, I was able to switch the website using the variable href created earlier
+in the process. 
 
 2. The second issue that I had was trying to find the correct XPATH to pull the top 10 list. Again, I tried to
 look at my notes, the powerpoint from the class session, and other examples online to find the correct XPATH. 
-Also with this, I slowly built onto the XPATH until I reached the correct file path. 
+Also with this, I slowly built onto the XPATH until I reached the correct file path. First I found the XPATH that had 
+no indication that it was a list that had additional elements in it, so I added the 'ol' text, but did have to find resources that
+pointed me in how to add it into the XPATH directly. Once the 'ol' and 'a' were added to the XPATH, I was able to create the csv file of the top 10 vulnerabilities. 
