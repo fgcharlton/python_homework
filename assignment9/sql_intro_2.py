@@ -25,10 +25,10 @@ try:
         print(df.groupby("product_id").agg({"line_item_id": "count", "total": "sum", "product_name": "first"}).head())
 
         # Sort DataFrame by product_name 
-        df.sort_values("product_name")
+        df_sorted = df.sort_values("product_name")
 
         # Write to CSV file
-        df.to_csv("assignment9/order_summary.csv")
+        df_sorted.to_csv("assignment9/order_summary.csv")
 except Exception as e:
     print(f"Exception caught: {e}")
 

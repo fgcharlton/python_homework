@@ -17,7 +17,7 @@ def add_subscribers(cursor, id, name, address):
     try:
         cursor.execute("INSERT INTO subscribers (id, name, address) VALUES (?,?,?)", (id, name, address))
     except sqlite3.IntegrityError:
-        print(f"{id}: {name} is already in the database.")
+        print(f"{name} and {address} is already in the database.")
 
 def add_subscriptions(cursor, id, subscriber_id, magazine_id, expiration_date):
     try:
@@ -34,22 +34,23 @@ try:
         # Task 2: Define Database Structure
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS publishers (
-                id INTEGER PRIMARY KEY,
+                publisher_id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE
             )
             """)
 
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS magazines (
-                id INTEGER PRIMARY KEY,
+                magazine_id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE,
-                publisher_id INTEGER NOT NULL
+                publisher_id INTEGER NOT NULL,
+                FOREIGN KEY (publisher_id) REFERENCES publishers(publisher_id)
             )
             """)
 
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS subscribers (
-                id INTEGER PRIMARY KEY,
+                subscriber_id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
                 address TEXT NOT NULL
             )
@@ -57,10 +58,12 @@ try:
 
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS subscriptions (
-                id INTEGER PRIMARY KEY,
+                subscription_id INTEGER PRIMARY KEY,
                 subscriber_id INTEGER NOT NULL,
                 magazine_id INTEGER NOT NULL,
-                expiration_date TEXT NOT NULL
+                expiration_date TEXT NOT NULL,
+                FOREIGN KEY (subscriber_id) REFERENCES subscribers(subscriber_id),
+                FOREIGN KEY (magazine_id) REFERENCES magazine(magazine_id)
             )
             """)
 
