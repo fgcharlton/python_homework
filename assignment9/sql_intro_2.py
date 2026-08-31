@@ -28,7 +28,7 @@ try:
         df_sorted = df.sort_values("product_name")
 
         # Write to CSV file
-        df_sorted.to_csv("assignment9/order_summary.csv")
+        df_sorted.to_csv("assignment9/order_summary.csv", index=False)
 except Exception as e:
     print(f"Exception caught: {e}")
 

@@ -1,29 +1,29 @@
 import sqlite3 
 
 # Task 3: Populate Tables with Data
-def add_publishers(cursor, id, name):
+def add_publishers(cursor, publisher_id, name):
     try:
-        cursor.execute("INSERT INTO publishers (id, name) VALUES (?,?)", (id, name))
+        cursor.execute("INSERT INTO publishers (publisher_id, name) VALUES (?,?)", (publisher_id, name))
     except sqlite3.IntegrityError:
         print(f"{name} is already in the database.")
 
-def add_magazines(cursor, id, name, publisher_id):
+def add_magazines(cursor, magazine_id, name, publisher_id):
     try:
-        cursor.execute("INSERT INTO magazines (id, name, publisher_id) VALUES (?,?,?)", (id, name, publisher_id))
+        cursor.execute("INSERT INTO magazines (magazine_id, name, publisher_id) VALUES (?,?,?)", (magazine_id, name, publisher_id))
     except sqlite3.IntegrityError:
         print(f"{name} is already in the database.")
 
-def add_subscribers(cursor, id, name, address):
+def add_subscribers(cursor, subscriber_id, name, address):
     try:
-        cursor.execute("INSERT INTO subscribers (id, name, address) VALUES (?,?,?)", (id, name, address))
+        cursor.execute("INSERT INTO subscribers (subscriber_id, name, address) VALUES (?,?,?)", (subscriber_id, name, address))
     except sqlite3.IntegrityError:
         print(f"{name} and {address} is already in the database.")
 
-def add_subscriptions(cursor, id, subscriber_id, magazine_id, expiration_date):
+def add_subscriptions(cursor, subscription_id, subscriber_id, magazine_id, expiration_date):
     try:
-        cursor.execute("INSERT INTO subscriptions (id, subscriber_id, magazine_id, expiration_date) VALUES (?,?,?,?)", (id, subscriber_id, magazine_id, expiration_date))
+        cursor.execute("INSERT INTO subscriptions (subscription_id, subscriber_id, magazine_id, expiration_date) VALUES (?,?,?,?)", (subscription_id, subscriber_id, magazine_id, expiration_date))
     except sqlite3.IntegrityError:
-        print(f"{id} is already in the database.")
+        print(f"{subscription_id} is already in the database.")
 
 # Task 1: Create a New SQLite Database
 try:
@@ -52,7 +52,8 @@ try:
             CREATE TABLE IF NOT EXISTS subscribers (
                 subscriber_id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
-                address TEXT NOT NULL
+                address TEXT NOT NULL,
+                UNIQUE (name, address)
             )
             """)
 
@@ -63,7 +64,7 @@ try:
                 magazine_id INTEGER NOT NULL,
                 expiration_date TEXT NOT NULL,
                 FOREIGN KEY (subscriber_id) REFERENCES subscribers(subscriber_id),
-                FOREIGN KEY (magazine_id) REFERENCES magazine(magazine_id)
+                FOREIGN KEY (magazine_id) REFERENCES magazines(magazine_id)
             )
             """)
 
@@ -117,7 +118,7 @@ for row2 in result2:
     print(row2)
 
 # Retrieve magazines for a particular publishers, one of the publishers created
-cursor.execute("SELECT m.name FROM publishers p JOIN magazines m on p.id = m.publisher_id WHERE p.name = 'National Geographic Society'")
+cursor.execute("SELECT m.name FROM publishers p JOIN magazines m on p.publisher_id = m.publisher_id WHERE p.name = 'National Geographic Society'")
 result3 = cursor.fetchall()
 print("-------------Magazines for National Geographic Society Publisher-------------")
 for row3 in result3:
