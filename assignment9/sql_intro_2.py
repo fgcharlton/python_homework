@@ -3,7 +3,7 @@ import sqlite3
 
 # Task 5: Read Data into a DataFrame
 try:
-    with sqlite3.connect("db/lesson.db") as conn:
+    with sqlite3.connect("../db/lesson.db") as conn:
         # Read into a DataFrame
         sql_statement = """SELECT l.line_item_id, l.quantity, l.product_id, p.product_name, p.price FROM line_items l JOIN products p ON l.product_id = p.product_id"""
         df = pd.read_sql_query(sql_statement, conn)
@@ -28,7 +28,7 @@ try:
         df_sorted = df.sort_values("product_name")
 
         # Write to CSV file
-        df_sorted.to_csv("assignment9/order_summary.csv", index=False)
+        df_sorted.to_csv("order_summary.csv", index=False)
 except Exception as e:
     print(f"Exception caught: {e}")
 

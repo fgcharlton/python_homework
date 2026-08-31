@@ -27,7 +27,7 @@ def add_subscriptions(cursor, subscription_id, subscriber_id, magazine_id, expir
 
 # Task 1: Create a New SQLite Database
 try:
-    with sqlite3.connect("db/magazines.db") as conn:
+    with sqlite3.connect("../db/magazines.db") as conn:
         conn.execute("PRAGMA foreign_keys = 1")
         cursor=conn.cursor()
 
@@ -64,7 +64,8 @@ try:
                 magazine_id INTEGER NOT NULL,
                 expiration_date TEXT NOT NULL,
                 FOREIGN KEY (subscriber_id) REFERENCES subscribers(subscriber_id),
-                FOREIGN KEY (magazine_id) REFERENCES magazines(magazine_id)
+                FOREIGN KEY (magazine_id) REFERENCES magazines(magazine_id),
+                UNIQUE (subscriber_id, magazine_id)
             )
             """)
 
