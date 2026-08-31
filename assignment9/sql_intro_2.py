@@ -19,16 +19,16 @@ try:
         print("----------Updated DataFrame with new column 'Total'----------")
         print(df.head())
 
-        # Add groupby() to group by the product_id 
+        # Add groupby() to group by the product_id and sort by product_names
+        summary = df.groupby("product_id").agg({"line_item_id": "count", "total": "sum", "product_name": "first"}).reset_index().sort_values("product_name")
+
         # Print first 5 lines of new DataFrame
         print("----------Updated DataFrame with groupby()----------")
-        print(df.groupby("product_id").agg({"line_item_id": "count", "total": "sum", "product_name": "first"}).head())
-
-        # Sort DataFrame by product_name 
-        df_sorted = df.sort_values("product_name")
+        print(summary.head())
 
         # Write to CSV file
-        df_sorted.to_csv("order_summary.csv", index=False)
+        summary.to_csv("order_summary.csv", index=False)
+        
 except Exception as e:
     print(f"Exception caught: {e}")
 
