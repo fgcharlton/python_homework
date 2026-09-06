@@ -21,7 +21,7 @@ LIMIT 5;
 cursor.execute(query)
 print("Task 1: Complex JOINs with Aggregation")
 for row in cursor.fetchall():
-    print(f"Order {row[0]}: ${row[1]:.2f}")
+    print(row[0], row[1])
 
 conn.close()
 
