@@ -33,7 +33,7 @@ cursor = conn.cursor()
 query2 = """
 SELECT c.customer_name, AVG(sub.total_price) AS average_total_price
 FROM customers AS c
-JOIN (
+LEFT JOIN (
     SELECT o.customer_id AS customer_id_b, SUM(l.quantity * p.price) AS total_price 
     FROM orders AS o
     JOIN line_items AS l
@@ -77,14 +77,10 @@ try:
 
     # Print results
     print("Task 3: An Insert Transaction Based on Data ")
+    print(f"order_id={order_id}")
     for line_item_id, quantity, product_name in rows:
         print(f"line_item_id={line_item_id}, quantity={quantity}, product_name={product_name}")
 
-    conn.commit()
-
-    # Delete lines
-    conn.execute("DELETE FROM line_items WHERE order_id = ?", (order_id,),)
-    conn.execute("DELETE FROM orders WHERE order_id = ?", (order_id,),)
     conn.commit()
 
 except Exception as e:
@@ -94,6 +90,7 @@ except Exception as e:
     print("Error: ", e)
 finally:
     conn.close()
+
 
 # Task 4: Aggregation with HAVING
 conn = sqlite3.connect("../db/lesson.db")
