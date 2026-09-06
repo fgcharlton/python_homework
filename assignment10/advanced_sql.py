@@ -31,7 +31,7 @@ cursor = conn.cursor()
 
 # For each customer, find the average price of their orders
 query2 = """
-SELECT c.customer_id, c.customer_name, AVG(sub.total_price) AS average_total_price
+SELECT c.customer_name, AVG(sub.total_price) AS average_total_price
 FROM customers AS c
 JOIN (
     SELECT o.customer_id AS customer_id_b, SUM(l.quantity * p.price) AS total_price 
@@ -47,8 +47,8 @@ GROUP BY c.customer_id;
 
 cursor.execute(query2)
 print("Task 2: Understanding Subqueries")
-for customer_id, customer_name, average_total_price in cursor.fetchall():
-    print(f"{customer_id}: {customer_name} - Average Price of Orders: {average_total_price}")
+for customer_name, average_total_price in cursor.fetchall():
+    print(f"{customer_name} - Average Price of Orders: {average_total_price}")
 
 conn.close()
 
@@ -80,11 +80,13 @@ try:
     for line_item_id, quantity, product_name in rows:
         print(f"line_item_id={line_item_id}, quantity={quantity}, product_name={product_name}")
 
+    conn.commit()
+
     # Delete lines
     conn.execute("DELETE FROM line_items WHERE order_id = ?", (order_id,),)
     conn.execute("DELETE FROM orders WHERE order_id = ?", (order_id,),)
-
     conn.commit()
+
 except Exception as e:
     conn.rollback()
     import traceback
@@ -110,6 +112,6 @@ ORDER BY order_count DESC;
 cursor.execute(query4)
 print("Task 4: Aggregation with HAVING")
 for employee_id, first_name, last_name, order_count in cursor.fetchall():
-    print(employee_id, first_name, last_name, order_count)
+    print(f"employee_id={employee_id}, first_name={first_name}, last_name={last_name}, order_count={order_count}")
 
 conn.close()
