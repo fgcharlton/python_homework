@@ -42,7 +42,7 @@ LEFT JOIN (
     ON l.product_id = p.product_id
     GROUP BY o.order_id, o.customer_id) AS sub 
     ON c.customer_id = sub.customer_id_b
-GROUP BY c.customer_id;
+GROUP BY c.customer_id, c.customer_name;
 """
 
 cursor.execute(query2)
