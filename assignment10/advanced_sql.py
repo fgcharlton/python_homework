@@ -40,7 +40,7 @@ LEFT JOIN (
     ON o.order_id = l.order_id
     JOIN products as p
     ON l.product_id = p.product_id
-    GROUP BY o.order_id) AS sub 
+    GROUP BY o.order_id, o.customer_id) AS sub 
     ON c.customer_id = sub.customer_id_b
 GROUP BY c.customer_id;
 """
@@ -108,7 +108,8 @@ ORDER BY order_count DESC;
 
 cursor.execute(query4)
 print("Task 4: Aggregation with HAVING")
+print("employee_id | first_name | last_name | order_count")
 for employee_id, first_name, last_name, order_count in cursor.fetchall():
-    print(f"employee_id={employee_id}, first_name={first_name}, last_name={last_name}, order_count={order_count}")
+    print(f"{employee_id} | {first_name} | {last_name} | {order_count}")
 
 conn.close()
