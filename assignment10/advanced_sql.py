@@ -31,7 +31,7 @@ cursor = conn.cursor()
 
 # For each customer, find the average price of their orders
 query2 = """
-SELECT c.customer_name, AVG(sub.total_price) AS avg_total_price
+SELECT c.customer_name, AVG(sub.total_price) AS average_total_price
 FROM customers AS c
 JOIN (
     SELECT o.customer_id AS customer_id_b, SUM(l.quantity * p.price) AS total_price 
@@ -47,17 +47,18 @@ GROUP BY c.customer_id;
 
 cursor.execute(query2)
 print("Task 2: Understanding Subqueries")
-print(cursor.fetchall())
+for customer_name, average_total_price in cursor.fetchall():
+    print(f"{customer_name} - Average Price of Orders: {average_total_price}")
 
 conn.close()
 
 # Task 3: An Insert Transaction Based on Data 
-
 try:
     conn = sqlite3.connect("../db/lesson.db")
     cursor = conn.cursor()
     conn.execute("PRAGMA foreign_keys = 1")
 
+    conn.execute("BEGIN TRANSACTION")
     # Retrieve customer_id
     cursor.execute("SELECT customer_id FROM customers WHERE customer_name = ?", ("Perez and Sons",),)
     cust_id = cursor.fetchone()[0]
@@ -66,7 +67,7 @@ try:
     cursor.execute("SELECT employee_id FROM employees WHERE last_name = ? AND first_name = ?", ("Harris", "Miranda",),)
     emp_id = cursor.fetchone()[0]
 
-    # Retrive product_id of 5 least expensive products
+    # Retrieve product_id of 5 least expensive products
     cursor.execute("SELECT product_id FROM products ORDER BY price ASC LIMIT 5")
     prod_ids = [row[0] for row in cursor.fetchall()]
 
@@ -85,6 +86,9 @@ try:
     for line_item_id, quantity, product_name in cursor.fetchall():
         print(f"line_item_id={line_item_id}, quantity={quantity}, product_name={product_name}")
 
+    # Delete lines
+    cursor.execute("DELETE FROM line_items WHERE order_id = ?", (order_id,),)
+    cursor.execute("DELETE FROM orders WHERE order_id = ?", (order_id,),)
     conn.commit()
 except Exception as e:
     conn.rollback()
@@ -110,6 +114,7 @@ ORDER BY order_count DESC;
 
 cursor.execute(query4)
 print("Task 4: Aggregation with HAVING")
-print(cursor.fetchall())
+for employee_id, first_name, last_name, order_count in cursor.fetchall():
+    print(f"{employee_id}: {first_name} {last_name} — {order_count} orders")
 
 conn.close()
