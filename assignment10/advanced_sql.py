@@ -21,7 +21,7 @@ LIMIT 5;
 cursor.execute(query)
 print("Task 1: Complex JOINs with Aggregation")
 for row in cursor.fetchall():
-    print(row[0], row[1])
+    print(f"Order ID: {row[0]}, Total Price: {row[1]}")
 
 conn.close()
 
